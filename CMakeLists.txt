@@ -27,6 +27,26 @@ HunterGate(
 
 project("Apache Thrift")
 
+set(is_android ${ANDROID}) # syntax compatibility
+string(COMPARE EQUAL "${CMAKE_OSX_SYSROOT}" "iphoneos" is_ios)
+string(COMPARE EQUAL "${CMAKE_SYSTEM_NAME}" "Linux" is_linux)
+string(COMPARE EQUAL "${CMAKE_GENERATOR}" "Xcode" is_xcode)
+
+# See: cmake/Hunter/config.cmake
+# First call to 'hunter_add_package' will contains read of Hunter/config.cmake
+# Next variables will be used:
+#   * is_ios
+#   * is_linux
+hunter_add_package(Sugar)
+include("${SUGAR_ROOT}/cmake/Sugar")
+include(sugar_include)
+
+hunter_add_package(ZLIB)
+find_package(ZLIB CONFIG REQUIRED)
+
+hunter_add_package(Boost)
+find_package(Boost CONFIG REQUIRED)
+
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${CMAKE_CURRENT_SOURCE_DIR}/build/cmake")
 
 # TODO: add `git rev-parse --short HEAD`
