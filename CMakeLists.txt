@@ -17,7 +17,13 @@
 # under the License.
 #
 
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.5)
+
+include("cmake/HunterGate.cmake")
+HunterGate(
+    URL "https://github.com/ruslo/hunter/archive/v0.14.25.tar.gz"
+    SHA1 "a7ba9775c1206ced7cac204db802b116736ca481"
+)
 
 project("Apache Thrift")
 
